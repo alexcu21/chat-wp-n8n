@@ -1,0 +1,94 @@
+/**
+ * SCSS Mixins
+ * 
+ * @package N8n_Chat_Widget
+ */
+
+// Responsive breakpoints
+@mixin mobile {
+	@media (max-width: $breakpoint-mobile) {
+		@content;
+	}
+}
+
+@mixin tablet {
+	@media (max-width: $breakpoint-tablet) {
+		@content;
+	}
+}
+
+@mixin desktop {
+	@media (min-width: $breakpoint-desktop) {
+		@content;
+	}
+}
+
+// Flexbox center
+@mixin flex-center {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+// Transition
+@mixin transition($properties...) {
+	transition: $properties;
+}
+
+// Box shadow
+@mixin box-shadow($shadow) {
+	box-shadow: $shadow;
+}
+
+// Accessibility - screen reader only
+@mixin sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border-width: 0;
+}
+
+// Focus styles
+@mixin focus-visible {
+	&:focus-visible {
+		outline: 2px solid $color-focus;
+		outline-offset: 2px;
+	}
+}
+
+// Truncate text
+@mixin truncate {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+// Custom scrollbar
+@mixin custom-scrollbar {
+	scrollbar-width: thin;
+	scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+
+	&::-webkit-scrollbar {
+		width: 8px;
+		height: 8px;
+	}
+
+	&::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background-color: rgba(0, 0, 0, 0.3);
+		border-radius: 4px;
+
+		&:hover {
+			background-color: rgba(0, 0, 0, 0.5);
+		}
+	}
+}
+

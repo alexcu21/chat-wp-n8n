@@ -1,0 +1,32 @@
+/**
+ * Chat Container Styles
+ * 
+ * @package N8n_Chat_Widget
+ */
+
+// Chat Container in Fullscreen Mode
+#n8n-chat-container {
+	width: $container-width;
+	height: $container-height;
+	max-width: $container-max-width;
+	border: 1px solid $color-border;
+	border-radius: $border-radius-md;
+	overflow: hidden;
+	@include box-shadow($box-shadow-light);
+	@include transition(all $transition-normal);
+
+	// Tablets
+	@include tablet {
+		height: 500px;
+		border-radius: $border-radius-sm;
+	}
+
+	// Mobile
+	@include mobile {
+		height: 400px;
+		border-radius: 0;
+		border-left: 0;
+		border-right: 0;
+	}
+}
+

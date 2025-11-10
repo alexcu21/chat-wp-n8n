@@ -1,0 +1,163 @@
+/**
+ * n8n Chat Widget - Estilos Personalizados
+ *
+ * Estilos adicionales para el widget de chat de n8n.
+ * Estos estilos complementan los estilos base de la librería @n8n/chat.
+ *
+ * @package N8n_Chat_Widget
+ * @version 1.0.0
+ */
+
+/* ==========================================================================
+   Contenedor del Chat en Modo Fullscreen
+   ========================================================================== */
+
+#n8n-chat-container {
+	width: 100%;
+	height: 600px;
+	max-width: 100%;
+	border: 1px solid #e0e0e0;
+	border-radius: 8px;
+	overflow: hidden;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* ==========================================================================
+   Ajustes Responsivos
+   ========================================================================== */
+
+/* Tablets */
+@media (max-width: 768px) {
+	#n8n-chat-container {
+		height: 500px;
+		border-radius: 4px;
+	}
+}
+
+/* Móviles */
+@media (max-width: 480px) {
+	#n8n-chat-container {
+		height: 400px;
+		border-radius: 0;
+		border-left: 0;
+		border-right: 0;
+	}
+}
+
+/* ==========================================================================
+   Personalización del Widget en Modo Window (Flotante)
+   ========================================================================== */
+
+/* Estos estilos afectan al widget cuando está en modo flotante */
+@media (min-width: 481px) {
+	/* Ajusta la posición del botón flotante si es necesario */
+	.n8n-chat-window {
+		bottom: 20px;
+		right: 20px;
+		z-index: 9999;
+	}
+}
+
+/* En dispositivos móviles, el chat flotante ocupa toda la pantalla */
+@media (max-width: 480px) {
+	.n8n-chat-window.open {
+		width: 100% !important;
+		height: 100% !important;
+		max-width: 100% !important;
+		max-height: 100% !important;
+		bottom: 0 !important;
+		right: 0 !important;
+		border-radius: 0 !important;
+	}
+}
+
+/* ==========================================================================
+   Ajustes de Accesibilidad
+   ========================================================================== */
+
+/* Mejora el contraste para mejor lectura */
+.n8n-chat-message {
+	line-height: 1.5;
+}
+
+/* Mejora el foco para navegación por teclado */
+.n8n-chat-input:focus,
+.n8n-chat-button:focus {
+	outline: 2px solid #0073aa;
+	outline-offset: 2px;
+}
+
+/* ==========================================================================
+   Integración con Temas de WordPress
+   ========================================================================== */
+
+/* Asegura que el widget no interfiera con elementos de WordPress */
+.n8n-chat-widget {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+/* Reset de estilos que podrían interferir */
+.n8n-chat-widget * {
+	box-sizing: border-box;
+}
+
+/* ==========================================================================
+   Modo de Alto Contraste (Accesibilidad)
+   ========================================================================== */
+
+@media (prefers-contrast: high) {
+	#n8n-chat-container {
+		border: 2px solid #000;
+	}
+	
+	.n8n-chat-input,
+	.n8n-chat-button {
+		border: 2px solid currentColor;
+	}
+}
+
+/* ==========================================================================
+   Modo Oscuro (Preferencia del Sistema)
+   ========================================================================== */
+
+@media (prefers-color-scheme: dark) {
+	#n8n-chat-container {
+		border-color: #333;
+		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+	}
+}
+
+/* ==========================================================================
+   Animaciones Suaves
+   ========================================================================== */
+
+/* Respeta la preferencia de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+	.n8n-chat-widget,
+	.n8n-chat-widget * {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
+}
+
+/* ==========================================================================
+   Soporte para RTL (Right-to-Left)
+   ========================================================================== */
+
+[dir="rtl"] .n8n-chat-window {
+	right: auto;
+	left: 20px;
+}
+
+/* ==========================================================================
+   Ajustes de Impresión
+   ========================================================================== */
+
+@media print {
+	.n8n-chat-widget,
+	.n8n-chat-window {
+		display: none !important;
+	}
+}
+

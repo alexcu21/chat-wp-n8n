@@ -1,0 +1,32 @@
+/**
+ * Window Mode (Floating) Styles
+ * 
+ * @package N8n_Chat_Widget
+ */
+
+// Adjust floating button position
+.n8n-chat-window {
+	bottom: $spacing-lg;
+	right: $spacing-lg;
+	z-index: $z-index-widget;
+
+	// On mobile devices, the floating chat takes up the full screen
+	@include mobile {
+		&.open {
+			width: 100% !important;
+			height: 100% !important;
+			max-width: 100% !important;
+			max-height: 100% !important;
+			bottom: 0 !important;
+			right: 0 !important;
+			border-radius: 0 !important;
+		}
+	}
+}
+
+// RTL Support
+[dir="rtl"] .n8n-chat-window {
+	right: auto;
+	left: $spacing-lg;
+}
+

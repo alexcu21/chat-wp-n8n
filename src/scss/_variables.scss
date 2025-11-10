@@ -1,0 +1,48 @@
+/**
+ * SCSS Variables
+ * 
+ * @package N8n_Chat_Widget
+ */
+
+// Colors
+$color-border: #e0e0e0;
+$color-border-dark: #333;
+$color-shadow: rgba(0, 0, 0, 0.1);
+$color-shadow-strong: rgba(0, 0, 0, 0.5);
+$color-focus: #0073aa;
+
+// Spacing
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 12px;
+$spacing-lg: 20px;
+$spacing-xl: 30px;
+
+// Sizes
+$container-width: 100%;
+$container-height: 600px;
+$container-max-width: 100%;
+
+// Border radius
+$border-radius-sm: 4px;
+$border-radius-md: 8px;
+$border-radius-lg: 12px;
+
+// Z-index
+$z-index-widget: 9999;
+
+// Transitions
+$transition-fast: 0.2s ease;
+$transition-normal: 0.3s ease;
+$transition-slow: 0.5s ease;
+
+// Breakpoints
+$breakpoint-mobile: 480px;
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 1024px;
+
+// Shadows
+$box-shadow-light: 0 2px 10px $color-shadow;
+$box-shadow-strong: 0 2px 10px $color-shadow-strong;
+$box-shadow-focus: 0 5px 40px rgba(0, 0, 0, 0.15);
+

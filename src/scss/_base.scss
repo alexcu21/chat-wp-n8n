@@ -1,0 +1,27 @@
+/**
+ * Base Styles
+ * 
+ * @package N8n_Chat_Widget
+ */
+
+// Reset styles that could interfere
+.n8n-chat-widget * {
+	box-sizing: border-box;
+}
+
+// Widget font
+.n8n-chat-widget {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+// Improve contrast for better readability
+.n8n-chat-message {
+	line-height: 1.5;
+}
+
+// Improve focus for keyboard navigation
+.n8n-chat-input,
+.n8n-chat-button {
+	@include focus-visible;
+}
+

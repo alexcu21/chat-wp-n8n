@@ -1,0 +1,49 @@
+# WordPress
+.DS_Store
+thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Dependencies
+node_modules/
+vendor/
+
+# Build files
+dist/
+*.log
+*.cache
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE_BIN/
+
+# Backup files
+*.bak
+*.swp
+*~
+
+# NPM/Yarn
+package-lock.json
+yarn.lock
+.pnpm-debug.log*
+
+# Testing
+coverage/
+.nyc_output/
+
+# Vite
+.vite/
+vite.config.js.timestamp-*
+.qodcache/
+.qodo/

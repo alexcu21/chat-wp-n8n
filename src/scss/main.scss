@@ -1,0 +1,37 @@
+/**
+ * n8n Chat Widget - Main Styles
+ *
+ * Styles for the n8n chat widget.
+ * These styles complement the base styles of the @n8n/chat library.
+ *
+ * @package N8n_Chat_Widget
+ * @version 1.1.0
+ */
+
+// Variables and Mixins
+@import 'variables';
+@import 'mixins';
+
+// Base Styles
+@import 'base';
+
+// Components
+@import 'container';
+@import 'window-mode';
+
+// Accessibility
+@import 'accessibility';
+
+/**
+ * Custom Utilities
+ */
+
+// Helper to visually hide elements but keep them accessible
+.sr-only {
+	@include sr-only;
+}
+
+// Helper for custom scrollbar
+.custom-scrollbar {
+	@include custom-scrollbar;
+}

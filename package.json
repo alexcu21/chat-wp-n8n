@@ -1,0 +1,52 @@
+{
+  "name": "chat-for-n8n",
+  "version": "1.1.0",
+  "description": "WordPress plugin to integrate n8n Chat Widget",
+  "author": "Alex Cuadra <https://alexcuadra.dev>",
+  "license": "GPL-2.0-or-later",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "watch": "vite build --watch",
+    "type-check": "tsc --noEmit",
+    "lint:js": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
+    "lint:css": "stylelint 'src/**/*.{css,scss}'",
+    "lint": "npm run type-check && npm run lint:js && npm run lint:css",
+    "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,scss,json}'",
+    "bundle": "node scripts/bundle.js",
+    "archive": "npm run build && npm run bundle",
+    "clean": "rm -rf dist node_modules package-lock.json"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.1",
+    "@typescript-eslint/eslint-plugin": "^8.15.0",
+    "@typescript-eslint/parser": "^8.15.0",
+    "@vitejs/plugin-legacy": "^5.4.2",
+    "archiver": "^7.0.1",
+    "autoprefixer": "^10.4.20",
+    "cssnano": "^7.0.6",
+    "eslint": "^9.15.0",
+    "postcss": "^8.4.49",
+    "postcss-preset-env": "^10.1.1",
+    "prettier": "^3.3.3",
+    "sass": "^1.80.7",
+    "stylelint": "^16.10.0",
+    "stylelint-config-standard-scss": "^13.1.0",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.11",
+    "vite-plugin-compression": "^0.5.1"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=9.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ]
+}
+
