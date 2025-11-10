@@ -47,6 +47,8 @@
     "last 2 versions",
     "not dead",
     "not ie 11"
-  ]
+  ],
+  "dependencies": {
+    "@n8n/chat": "^0.65.0"
+  }
 }
-

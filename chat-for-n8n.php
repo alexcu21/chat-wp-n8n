@@ -1,88 +1,90 @@
 <?php
 /**
- * Plugin Name: n8n Chat Widget
- * Description: Añade el widget de chat impulsado por n8n a tu sitio web, conectando flujos de trabajo de automatización e IA.
+ * Plugin Name: Chat for n8n
+ * Description: Add the n8n-powered chat widget to your website, connecting automation and AI workflows.
  * Version: 1.0.0
  * Author: Alex Cuadra
  * Author URI: https://alexcuadra.dev
  * License: GPL-2.0-or-later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain: n8n-chat-widget
+ * Text Domain: chat-for-n8n
  * Domain Path: /languages
  * Requires at least: 5.8
  * Requires PHP: 7.4
  *
- * @package N8n_Chat_Widget
+ * @package Chat_for_n8n
  */
 
-// Evita el acceso directo al archivo.
+// phpcs:set WordPress.NamingConventions.PrefixAllGlobals prefixes[] chat_for_n8n
+
+// Prevent direct access to the file.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-// Definir constantes del plugin.
-define( 'N8N_CHAT_WIDGET_VERSION', '1.0.0' );
-define( 'N8N_CHAT_WIDGET_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
-define( 'N8N_CHAT_WIDGET_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+// Define plugin constants.
+define( 'CHAT_FOR_N8N_VERSION', '1.0.0' );
+define( 'CHAT_FOR_N8N_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+define( 'CHAT_FOR_N8N_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
 /**
- * Registra la página de ajustes en el menú de administración.
+ * Registers the settings page in the admin menu.
  */
-function n8n_chat_widget_add_admin_menu() {
+function chat_for_n8n_add_admin_menu() { // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedFunctionFound
 	add_options_page(
-		__( 'Ajustes del Chat n8n', 'n8n-chat-widget' ),
-		__( 'n8n Chat Widget', 'n8n-chat-widget' ),
+		__( 'n8n Chat Settings', 'chat-for-n8n' ),
+		__( 'Chat for n8n', 'chat-for-n8n' ),
 		'manage_options',
-		'n8n-chat-widget',
+		'chat-for-n8n',
 		'n8n_chat_widget_options_page'
 	);
 }
-add_action( 'admin_menu', 'n8n_chat_widget_add_admin_menu' );
+add_action( 'admin_menu', 'chat_for_n8n_add_admin_menu' );
 
 /**
- * Muestra la página de ajustes del plugin.
+ * Displays the plugin settings page.
  */
 function n8n_chat_widget_options_page() {
-	// Verifica permisos.
+	// Check permissions.
 	if ( ! current_user_can( 'manage_options' ) ) {
 		return;
 	}
 
-	// Muestra mensajes de actualización si se han guardado cambios.
+	// Display update messages if settings have been saved.
 	if ( isset( $_GET['settings-updated'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		add_settings_error(
-			'n8n_chat_widget_messages',
-			'n8n_chat_widget_message',
-			__( 'Ajustes guardados correctamente.', 'n8n-chat-widget' ),
+			'chat_for_n8n_widget_messages',
+			'chat_for_n8n_widget_message',
+			__( 'Settings saved successfully.', 'chat-for-n8n' ),
 			'updated'
 		);
 	}
 
-	settings_errors( 'n8n_chat_widget_messages' );
+	settings_errors( 'chat_for_n8n_widget_messages' );
 	?>
 	<div class="wrap">
 		<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
 		<form action="options.php" method="post">
 			<?php
-			settings_fields( 'n8n_chat_widget_group' );
+			settings_fields( 'chat_for_n8n_widget_group' );
 			do_settings_sections( 'n8n_chat_widget' );
-			submit_button( __( 'Guardar Cambios', 'n8n-chat-widget' ) );
+			submit_button( __( 'Save Changes', 'chat-for-n8n' ) );
 			?>
 		</form>
 		<hr>
-		<h2><?php esc_html_e( 'Cómo usar este plugin', 'n8n-chat-widget' ); ?></h2>
+		<h2><?php esc_html_e( 'How to Use This Plugin', 'chat-for-n8n' ); ?></h2>
 		<ol>
-			<li><?php esc_html_e( 'Crea un workflow en n8n con un nodo "Chat Trigger".', 'n8n-chat-widget' ); ?></li>
-			<li><?php esc_html_e( 'Copia la URL del webhook del nodo "Chat Trigger".', 'n8n-chat-widget' ); ?></li>
-			<li><?php esc_html_e( 'Pega la URL en el campo de arriba y guarda los cambios.', 'n8n-chat-widget' ); ?></li>
-			<li><?php esc_html_e( 'El widget de chat aparecerá automáticamente en tu sitio web.', 'n8n-chat-widget' ); ?></li>
+			<li><?php esc_html_e( 'Create a workflow in n8n with a "Chat Trigger" node.', 'chat-for-n8n' ); ?></li>
+			<li><?php esc_html_e( 'Copy the webhook URL from the "Chat Trigger" node.', 'chat-for-n8n' ); ?></li>
+			<li><?php esc_html_e( 'Paste the URL in the field above and save the changes.', 'chat-for-n8n' ); ?></li>
+			<li><?php esc_html_e( 'The chat widget will appear automatically on your website.', 'chat-for-n8n' ); ?></li>
 		</ol>
 		<p>
 			<?php
 			printf(
-				/* translators: %s: URL de la documentación de n8n */
-				esc_html__( 'Para más información, consulta la %s.', 'n8n-chat-widget' ),
-				'<a href="https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-langchain.chattrigger/" target="_blank" rel="noopener noreferrer">' . esc_html__( 'documentación oficial de n8n', 'n8n-chat-widget' ) . '</a>'
+				/* translators: %s: n8n documentation URL */
+				esc_html__( 'For more information, check the %s.', 'chat-for-n8n' ),
+				'<a href="https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-langchain.chattrigger/" target="_blank" rel="noopener noreferrer">' . esc_html__( 'official n8n documentation', 'chat-for-n8n' ) . '</a>'
 			);
 			?>
 		</p>
@@ -91,10 +93,10 @@ function n8n_chat_widget_options_page() {
 }
 
 /**
- * Registra los ajustes del plugin.
+ * Registers the plugin settings.
  */
 function n8n_chat_widget_settings_init() {
-	// Registrar ajustes.
+	// Register settings.
 	register_setting(
 		'n8n_chat_widget_group',
 		'n8n_chat_webhook_url',
@@ -185,98 +187,98 @@ function n8n_chat_widget_settings_init() {
 		)
 	);
 
-	// Sección Principal.
+	// Main Section.
 	add_settings_section(
 		'n8n_chat_widget_main_section',
-		__( 'Configuración Principal del Widget', 'n8n-chat-widget' ),
+		__( 'Widget Main Configuration', 'chat-for-n8n' ),
 		'n8n_chat_widget_main_section_callback',
 		'n8n_chat_widget'
 	);
 
-	// Campo: URL del Webhook.
+	// Field: Webhook URL.
 	add_settings_field(
 		'n8n_chat_webhook_url_field',
-		__( 'URL del Webhook de n8n Chat', 'n8n-chat-widget' ),
+		__( 'n8n Chat Webhook URL', 'chat-for-n8n' ),
 		'n8n_chat_webhook_url_render',
 		'n8n_chat_widget',
 		'n8n_chat_widget_main_section'
 	);
 
-	// Sección de Apariencia.
+	// Appearance Section.
 	add_settings_section(
 		'n8n_chat_widget_appearance_section',
-		__( 'Configuración de Apariencia', 'n8n-chat-widget' ),
+		__( 'Appearance Configuration', 'chat-for-n8n' ),
 		'n8n_chat_widget_appearance_section_callback',
 		'n8n_chat_widget'
 	);
 
-	// Campo: Modo del Widget.
+	// Field: Widget Mode.
 	add_settings_field(
 		'n8n_chat_widget_mode_field',
-		__( 'Modo del Widget', 'n8n-chat-widget' ),
+		__( 'Widget Mode', 'chat-for-n8n' ),
 		'n8n_chat_widget_mode_render',
 		'n8n_chat_widget',
 		'n8n_chat_widget_appearance_section'
 	);
 
-	// Campo: Idioma.
+	// Field: Language.
 	add_settings_field(
 		'n8n_chat_widget_language_field',
-		__( 'Idioma', 'n8n-chat-widget' ),
+		__( 'Language', 'chat-for-n8n' ),
 		'n8n_chat_widget_language_render',
 		'n8n_chat_widget',
 		'n8n_chat_widget_appearance_section'
 	);
 
-	// Campo: Pantalla de Bienvenida.
+	// Field: Welcome Screen.
 	add_settings_field(
 		'n8n_chat_widget_welcome_screen_field',
-		__( 'Mostrar Pantalla de Bienvenida', 'n8n-chat-widget' ),
+		__( 'Show Welcome Screen', 'chat-for-n8n' ),
 		'n8n_chat_widget_welcome_screen_render',
 		'n8n_chat_widget',
 		'n8n_chat_widget_appearance_section'
 	);
 
-	// Campo: Mensajes Iniciales.
+	// Field: Initial Messages.
 	add_settings_field(
 		'n8n_chat_widget_initial_messages_field',
-		__( 'Mensajes Iniciales', 'n8n-chat-widget' ),
+		__( 'Initial Messages', 'chat-for-n8n' ),
 		'n8n_chat_widget_initial_messages_render',
 		'n8n_chat_widget',
 		'n8n_chat_widget_appearance_section'
 	);
 
-	// Campo: Título.
+	// Field: Title.
 	add_settings_field(
 		'n8n_chat_widget_title_field',
-		__( 'Título del Chat', 'n8n-chat-widget' ),
+		__( 'Chat Title', 'chat-for-n8n' ),
 		'n8n_chat_widget_title_render',
 		'n8n_chat_widget',
 		'n8n_chat_widget_appearance_section'
 	);
 
-	// Campo: Subtítulo.
+	// Field: Subtitle.
 	add_settings_field(
 		'n8n_chat_widget_subtitle_field',
-		__( 'Subtítulo del Chat', 'n8n-chat-widget' ),
+		__( 'Chat Subtitle', 'chat-for-n8n' ),
 		'n8n_chat_widget_subtitle_render',
 		'n8n_chat_widget',
 		'n8n_chat_widget_appearance_section'
 	);
 
-	// Campo: Placeholder del Input.
+	// Field: Input Placeholder.
 	add_settings_field(
 		'n8n_chat_widget_input_placeholder_field',
-		__( 'Placeholder del Input', 'n8n-chat-widget' ),
+		__( 'Input Placeholder', 'chat-for-n8n' ),
 		'n8n_chat_widget_input_placeholder_render',
 		'n8n_chat_widget',
 		'n8n_chat_widget_appearance_section'
 	);
 
-	// Campo: Cargar Sesión Previa.
+	// Field: Load Previous Session.
 	add_settings_field(
 		'n8n_chat_widget_load_session_field',
-		__( 'Cargar Sesión Previa', 'n8n-chat-widget' ),
+		__( 'Load Previous Session', 'chat-for-n8n' ),
 		'n8n_chat_widget_load_session_render',
 		'n8n_chat_widget',
 		'n8n_chat_widget_appearance_section'
@@ -285,21 +287,21 @@ function n8n_chat_widget_settings_init() {
 add_action( 'admin_init', 'n8n_chat_widget_settings_init' );
 
 /**
- * Callback para la sección principal.
+ * Callback for the main section.
  */
 function n8n_chat_widget_main_section_callback() {
-	echo '<p>' . esc_html__( 'Introduce la URL pública de tu Webhook de n8n Chat Trigger para activar el widget.', 'n8n-chat-widget' ) . '</p>';
+	echo '<p>' . esc_html__( 'Enter the public URL of your n8n Chat Trigger Webhook to activate the widget.', 'chat-for-n8n' ) . '</p>';
 }
 
 /**
- * Callback para la sección de apariencia.
+ * Callback for the appearance section.
  */
 function n8n_chat_widget_appearance_section_callback() {
-	echo '<p>' . esc_html__( 'Personaliza la apariencia y comportamiento del widget de chat.', 'n8n-chat-widget' ) . '</p>';
+	echo '<p>' . esc_html__( 'Customize the appearance and behavior of the chat widget.', 'chat-for-n8n' ) . '</p>';
 }
 
 /**
- * Renderiza el campo de URL del webhook.
+ * Renders the webhook URL field.
  */
 function n8n_chat_webhook_url_render() {
 	$url = get_option( 'n8n_chat_webhook_url' );
@@ -307,40 +309,40 @@ function n8n_chat_webhook_url_render() {
 	<input type="url" 
 		   name="n8n_chat_webhook_url" 
 		   value="<?php echo esc_attr( $url ); ?>" 
-		   placeholder="<?php esc_attr_e( 'https://tudominio.com/webhook/...', 'n8n-chat-widget' ); ?>" 
+		   placeholder="<?php esc_attr_e( 'https://yourdomain.com/webhook/...', 'chat-for-n8n' ); ?>" 
 		   size="60" 
 		   class="regular-text">
 	<p class="description">
-		<?php esc_html_e( 'Asegúrate de que esta URL provenga de tu nodo "Chat Trigger" en n8n.', 'n8n-chat-widget' ); ?>
+		<?php esc_html_e( 'Make sure this URL comes from your "Chat Trigger" node in n8n.', 'chat-for-n8n' ); ?>
 	</p>
 	<?php
 }
 
 /**
- * Renderiza el campo de modo del widget.
+ * Renders the widget mode field.
  */
 function n8n_chat_widget_mode_render() {
 	$mode = get_option( 'n8n_chat_widget_mode', 'window' );
 	?>
 	<select name="n8n_chat_widget_mode">
 		<option value="window" <?php selected( $mode, 'window' ); ?>>
-			<?php esc_html_e( 'Ventana Flotante', 'n8n-chat-widget' ); ?>
+			<?php esc_html_e( 'Floating Window', 'chat-for-n8n' ); ?>
 		</option>
 		<option value="fullscreen" <?php selected( $mode, 'fullscreen' ); ?>>
-			<?php esc_html_e( 'Pantalla Completa', 'n8n-chat-widget' ); ?>
+			<?php esc_html_e( 'Fullscreen', 'chat-for-n8n' ); ?>
 		</option>
 	</select>
 	<p class="description">
-		<?php esc_html_e( 'Ventana Flotante: widget en la esquina inferior derecha. Pantalla Completa: usa el shortcode [n8n_chat] en una página.', 'n8n-chat-widget' ); ?>
+		<?php esc_html_e( 'Floating Window: widget in the bottom right corner. Fullscreen: use the shortcode [n8n_chat] on a page.', 'chat-for-n8n' ); ?>
 	</p>
 	<?php
 }
 
 /**
- * Renderiza el campo de idioma.
+ * Renders the language field.
  */
 function n8n_chat_widget_language_render() {
-	$language = get_option( 'n8n_chat_widget_language', 'es' );
+	$language = get_option( 'n8n_chat_widget_language', 'en' );
 	?>
 	<select name="n8n_chat_widget_language">
 		<option value="en" <?php selected( $language, 'en' ); ?>>English</option>
@@ -350,13 +352,13 @@ function n8n_chat_widget_language_render() {
 		<option value="pt" <?php selected( $language, 'pt' ); ?>>Português</option>
 	</select>
 	<p class="description">
-		<?php esc_html_e( 'Idioma predeterminado del widget de chat.', 'n8n-chat-widget' ); ?>
+		<?php esc_html_e( 'Default language for the chat widget.', 'chat-for-n8n' ); ?>
 	</p>
 	<?php
 }
 
 /**
- * Renderiza el campo de pantalla de bienvenida.
+ * Renders the welcome screen field.
  */
 function n8n_chat_widget_welcome_screen_render() {
 	$show_welcome = get_option( 'n8n_chat_widget_welcome_screen', true );
@@ -366,13 +368,13 @@ function n8n_chat_widget_welcome_screen_render() {
 			   name="n8n_chat_widget_welcome_screen" 
 			   value="1" 
 			   <?php checked( $show_welcome, true ); ?>>
-		<?php esc_html_e( 'Mostrar pantalla de bienvenida al abrir el chat', 'n8n-chat-widget' ); ?>
+		<?php esc_html_e( 'Show welcome screen when opening the chat', 'chat-for-n8n' ); ?>
 	</label>
 	<?php
 }
 
 /**
- * Renderiza el campo de mensajes iniciales.
+ * Renders the initial messages field.
  */
 function n8n_chat_widget_initial_messages_render() {
 	$initial_messages = get_option( 'n8n_chat_widget_initial_messages', '' );
@@ -381,15 +383,15 @@ function n8n_chat_widget_initial_messages_render() {
 			  rows="3" 
 			  cols="60" 
 			  class="large-text"
-			  placeholder="<?php esc_attr_e( '¡Hola! ¿En qué puedo ayudarte hoy?', 'n8n-chat-widget' ); ?>"><?php echo esc_textarea( $initial_messages ); ?></textarea>
+			  placeholder="<?php esc_attr_e( 'Hi! How can I help you today?', 'chat-for-n8n' ); ?>"><?php echo esc_textarea( $initial_messages ); ?></textarea>
 	<p class="description">
-		<?php esc_html_e( 'Mensaje de bienvenida que verán los usuarios (opcional).', 'n8n-chat-widget' ); ?>
+		<?php esc_html_e( 'Welcome message that users will see (optional).', 'chat-for-n8n' ); ?>
 	</p>
 	<?php
 }
 
 /**
- * Renderiza el campo de título del chat.
+ * Renders the chat title field.
  */
 function n8n_chat_widget_title_render() {
 	$title = get_option( 'n8n_chat_widget_title', 'Chat' );
@@ -398,15 +400,15 @@ function n8n_chat_widget_title_render() {
 		   name="n8n_chat_widget_title" 
 		   value="<?php echo esc_attr( $title ); ?>" 
 		   class="regular-text"
-		   placeholder="<?php esc_attr_e( 'Chat', 'n8n-chat-widget' ); ?>">
+		   placeholder="<?php esc_attr_e( 'Chat', 'chat-for-n8n' ); ?>">
 	<p class="description">
-		<?php esc_html_e( 'Título que aparecerá en la cabecera del chat.', 'n8n-chat-widget' ); ?>
+		<?php esc_html_e( 'Title that will appear in the chat header.', 'chat-for-n8n' ); ?>
 	</p>
 	<?php
 }
 
 /**
- * Renderiza el campo de subtítulo del chat.
+ * Renders the chat subtitle field.
  */
 function n8n_chat_widget_subtitle_render() {
 	$subtitle = get_option( 'n8n_chat_widget_subtitle', '' );
@@ -415,15 +417,15 @@ function n8n_chat_widget_subtitle_render() {
 		   name="n8n_chat_widget_subtitle" 
 		   value="<?php echo esc_attr( $subtitle ); ?>" 
 		   class="regular-text"
-		   placeholder="<?php esc_attr_e( '¿En qué puedo ayudarte?', 'n8n-chat-widget' ); ?>">
+		   placeholder="<?php esc_attr_e( 'How can I help you?', 'chat-for-n8n' ); ?>">
 	<p class="description">
-		<?php esc_html_e( 'Subtítulo que aparecerá debajo del título (opcional).', 'n8n-chat-widget' ); ?>
+		<?php esc_html_e( 'Subtitle that will appear below the title (optional).', 'chat-for-n8n' ); ?>
 	</p>
 	<?php
 }
 
 /**
- * Renderiza el campo de placeholder del input.
+ * Renders the input placeholder field.
  */
 function n8n_chat_widget_input_placeholder_render() {
 	$placeholder = get_option( 'n8n_chat_widget_input_placeholder', '' );
@@ -432,15 +434,15 @@ function n8n_chat_widget_input_placeholder_render() {
 		   name="n8n_chat_widget_input_placeholder" 
 		   value="<?php echo esc_attr( $placeholder ); ?>" 
 		   class="regular-text"
-		   placeholder="<?php esc_attr_e( 'Escribe tu mensaje...', 'n8n-chat-widget' ); ?>">
+		   placeholder="<?php esc_attr_e( 'Type your message...', 'chat-for-n8n' ); ?>">
 	<p class="description">
-		<?php esc_html_e( 'Texto que aparece en el campo de entrada antes de escribir (opcional).', 'n8n-chat-widget' ); ?>
+		<?php esc_html_e( 'Text that appears in the input field before typing (optional).', 'chat-for-n8n' ); ?>
 	</p>
 	<?php
 }
 
 /**
- * Renderiza el campo de cargar sesión previa.
+ * Renders the load previous session field.
  */
 function n8n_chat_widget_load_session_render() {
 	$load_session = get_option( 'n8n_chat_widget_load_session', false );
@@ -450,14 +452,14 @@ function n8n_chat_widget_load_session_render() {
 			   name="n8n_chat_widget_load_session" 
 			   value="1" 
 			   <?php checked( $load_session, true ); ?>>
-		<?php esc_html_e( 'Mantener el historial de conversaciones entre sesiones', 'n8n-chat-widget' ); ?>
+		<?php esc_html_e( 'Keep conversation history between sessions', 'chat-for-n8n' ); ?>
 	</label>
 	<p class="description">
 		<?php
 		printf(
-			/* translators: %s: Enlace a la documentación */
-			esc_html__( 'Requiere configurar memoria en tu workflow de n8n. %s', 'n8n-chat-widget' ),
-			'<a href="https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-langchain.chattrigger/" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Más información', 'n8n-chat-widget' ) . '</a>'
+			/* translators: %s: Link to documentation */
+			esc_html__( 'Requires setting up memory in your n8n workflow. %s', 'chat-for-n8n' ),
+			'<a href="https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-langchain.chattrigger/" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Learn more', 'chat-for-n8n' ) . '</a>'
 		);
 		?>
 	</p>
@@ -465,67 +467,50 @@ function n8n_chat_widget_load_session_render() {
 }
 
 /**
- * Encola los scripts y estilos necesarios en el frontend.
+ * Enqueues the necessary scripts and styles on the frontend.
  */
 function n8n_chat_widget_enqueue_assets() {
-	// Solo encola si la URL del webhook está configurada.
+	// Only enqueue if webhook URL is configured.
 	$webhook_url = get_option( 'n8n_chat_webhook_url' );
 	if ( empty( $webhook_url ) ) {
 		return;
 	}
 
-	// Determinar si usamos archivos de desarrollo o producción.
+	// Determine whether to use development or production files.
 	$use_dev = defined( 'WP_DEBUG' ) && WP_DEBUG && defined( 'N8N_CHAT_WIDGET_DEV' ) && N8N_CHAT_WIDGET_DEV;
 	
-	// Directorios de archivos.
+	// File directories.
 	$js_file  = $use_dev ? 'src/js/main.js' : 'dist/main.js';
 	$css_file = $use_dev ? 'src/scss/main.scss' : 'dist/chat-for-n8n.css';
 	
-	// Verificar si existe el archivo compilado, si no, usar el legacy.
-	if ( ! file_exists( N8N_CHAT_WIDGET_PLUGIN_DIR . $js_file ) ) {
+	// Check if compiled file exists, otherwise use legacy.
+	if ( ! file_exists( CHAT_FOR_N8N_PLUGIN_DIR . $js_file ) ) {
 		$js_file = 'chat-for-n8n.js';
 	}
-	if ( ! file_exists( N8N_CHAT_WIDGET_PLUGIN_DIR . $css_file ) ) {
+	if ( ! file_exists( CHAT_FOR_N8N_PLUGIN_DIR . $css_file ) ) {
 		$css_file = 'chat-for-n8n.css';
 	}
 
-	// 1. Cargar la biblioteca n8n Chat desde CDN.
-	wp_enqueue_script(
-		'n8n-chat-lib',
-		'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js',
+	// 1. Load widget styles (includes bundled @n8n/chat CSS).
+	wp_enqueue_style(
+		'chat-for-n8n-css',
+		CHAT_FOR_N8N_PLUGIN_URL . $css_file,
 		array(),
-		N8N_CHAT_WIDGET_VERSION,
+		CHAT_FOR_N8N_VERSION
+	);
+
+	// 2. Load widget script (includes bundled @n8n/chat library).
+	wp_enqueue_script(
+		'chat-for-n8n',
+		CHAT_FOR_N8N_PLUGIN_URL . $js_file,
+		array(),
+		CHAT_FOR_N8N_VERSION,
 		true
 	);
 
-	// 2. Cargar los estilos de la librería.
-	wp_enqueue_style(
-		'n8n-chat-lib-css',
-		'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css',
-		array(),
-		N8N_CHAT_WIDGET_VERSION
-	);
-
-	// 3. Cargar estilos personalizados del widget.
-	wp_enqueue_style(
-		'n8n-chat-widget-css',
-		N8N_CHAT_WIDGET_PLUGIN_URL . $css_file,
-		array( 'n8n-chat-lib-css' ),
-		N8N_CHAT_WIDGET_VERSION
-	);
-
-	// 4. Cargar el script de inicialización del widget.
-	wp_enqueue_script(
-		'n8n-chat-widget',
-		N8N_CHAT_WIDGET_PLUGIN_URL . $js_file,
-		array(),
-		N8N_CHAT_WIDGET_VERSION,
-		true
-	);
-
-	// 5. Pasar configuración al script como variable global.
+	// 3. Pass configuration to script as global variable.
 	$mode             = get_option( 'n8n_chat_widget_mode', 'window' );
-	$language         = get_option( 'n8n_chat_widget_language', 'es' );
+	$language         = get_option( 'n8n_chat_widget_language', 'en' );
 	$welcome_screen   = get_option( 'n8n_chat_widget_welcome_screen', true );
 	$initial_messages = get_option( 'n8n_chat_widget_initial_messages', '' );
 	$title            = get_option( 'n8n_chat_widget_title', 'Chat' );
@@ -534,32 +519,32 @@ function n8n_chat_widget_enqueue_assets() {
 	$load_session     = get_option( 'n8n_chat_widget_load_session', false );
 
 	$config = array(
-		'webhookUrl'        => esc_url_raw( $webhook_url ),
-		'mode'              => sanitize_text_field( $mode ),
-		'language'          => sanitize_text_field( $language ),
-		'showWelcomeScreen' => rest_sanitize_boolean( $welcome_screen ),
-		'title'             => sanitize_text_field( $title ),
+		'webhookUrl'          => esc_url_raw( $webhook_url ),
+		'mode'                => sanitize_text_field( $mode ),
+		'language'            => sanitize_text_field( $language ),
+		'showWelcomeScreen'   => rest_sanitize_boolean( $welcome_screen ),
+		'title'               => sanitize_text_field( $title ),
 		'loadPreviousSession' => rest_sanitize_boolean( $load_session ),
 	);
 
-	// Añadir subtitle si está configurado.
+	// Add subtitle if configured.
 	if ( ! empty( $subtitle ) ) {
 		$config['subtitle'] = sanitize_text_field( $subtitle );
 	}
 
-	// Añadir placeholder si está configurado.
+	// Add placeholder if configured.
 	if ( ! empty( $placeholder ) ) {
 		$config['inputPlaceholder'] = sanitize_text_field( $placeholder );
 	}
 
-	// Añadir mensajes iniciales si están configurados.
+	// Add initial messages if configured.
 	if ( ! empty( $initial_messages ) ) {
 		$config['initialMessages'] = array( wp_kses_post( $initial_messages ) );
 	}
 
-	// Inyectar la configuración como script inline en el head para que esté disponible para el módulo.
+	// Inject configuration as inline script in the head so it's available to the module.
 	wp_add_inline_script(
-		'n8n-chat-widget',
+		'chat-for-n8n',
 		'window.n8nChatConfig = ' . wp_json_encode( $config ) . ';',
 		'before'
 	);
@@ -567,21 +552,21 @@ function n8n_chat_widget_enqueue_assets() {
 add_action( 'wp_enqueue_scripts', 'n8n_chat_widget_enqueue_assets' );
 
 /**
- * Añade el atributo type="module" al script de n8n chat.
+ * Adds the type="module" attribute to the widget script.
  *
- * @param string $tag    El tag del script.
- * @param string $handle El handle del script.
- * @param string $src    La URL del script.
- * @return string El tag modificado.
+ * @param string $tag    The script tag.
+ * @param string $handle The script handle.
+ * @param string $src    The script URL.
+ * @return string The modified tag.
  */
 function n8n_chat_widget_add_type_module( $tag, $handle, $src ) {
-	// Solo añadir type="module" a nuestros scripts específicos.
-	if ( 'n8n-chat-lib' === $handle || 'n8n-chat-widget' === $handle ) {
-		// Reemplazar type='text/javascript' con type='module'.
+	// Only add type="module" to widget script.
+	if ( 'chat-for-n8n' === $handle ) {
+		// Replace type='text/javascript' with type='module'.
 		$tag = str_replace( " type='text/javascript'", " type='module'", $tag );
-		// También manejar comillas dobles.
+		// Also handle double quotes.
 		$tag = str_replace( ' type="text/javascript"', ' type="module"', $tag );
-		// Si no tiene type, añadirlo.
+		// If it doesn't have type, add it.
 		if ( strpos( $tag, "type='module'" ) === false && strpos( $tag, 'type="module"' ) === false ) {
 			$tag = str_replace( '<script ', '<script type="module" ', $tag );
 		}
@@ -591,27 +576,27 @@ function n8n_chat_widget_add_type_module( $tag, $handle, $src ) {
 add_filter( 'script_loader_tag', 'n8n_chat_widget_add_type_module', 10, 3 );
 
 /**
- * Shortcode para insertar el chat en una página.
+ * Shortcode to insert chat widget on a page.
  *
- * @return string HTML del contenedor del chat.
+ * @return string HTML of the chat container.
  */
 function n8n_chat_widget_shortcode() {
 	$webhook_url = get_option( 'n8n_chat_webhook_url' );
 	if ( empty( $webhook_url ) ) {
-		return '<p>' . esc_html__( 'El widget de chat no está configurado. Por favor, configura la URL del webhook en los ajustes.', 'n8n-chat-widget' ) . '</p>';
+		return '<p>' . esc_html__( 'The chat widget is not configured. Please configure the webhook URL in the settings.', 'chat-for-n8n' ) . '</p>';
 	}
 	return '<div id="n8n-chat-container"></div>';
 }
 add_shortcode( 'n8n_chat', 'n8n_chat_widget_shortcode' );
 
 /**
- * Añade enlaces útiles en la página de plugins.
+ * Adds useful links to the plugins page.
  *
- * @param array $links Enlaces existentes.
- * @return array Enlaces modificados.
+ * @param array $links Existing links.
+ * @return array Modified links.
  */
 function n8n_chat_widget_plugin_action_links( $links ) {
-	$settings_link = '<a href="' . esc_url( admin_url( 'options-general.php?page=n8n-chat-widget' ) ) . '">' . __( 'Ajustes', 'n8n-chat-widget' ) . '</a>';
+	$settings_link = '<a href="' . esc_url( admin_url( 'options-general.php?page=chat-for-n8n' ) ) . '">' . __( 'Settings', 'chat-for-n8n' ) . '</a>';
 	array_unshift( $links, $settings_link );
 	return $links;
 }

@@ -2,10 +2,14 @@
  * n8n Chat Widget - Widget Initialization
  * 
  * This file initializes the n8n chat widget using the @n8n/chat library.
- * The library is imported as an ES6 module.
+ * The library is imported as an ES6 module and bundled with the plugin.
  * 
  * @package N8n_Chat_Widget
  */
+
+// Import n8n chat library
+import { createChat } from '@n8n/chat';
+import '@n8n/chat/style.css';
 
 // Import SCSS styles
 import '../scss/main.scss';
@@ -13,21 +17,17 @@ import '../scss/main.scss';
 // Import types
 import type {
 	N8nChatConfig,
-	ChatConfig,
 	I18nTranslations,
 	N8nChatWidgetAPI
 } from '../types';
 
-/**
- * Note: The createChat function is loaded from the @n8n/chat CDN library
- * via WordPress wp_enqueue_script in the PHP file.
- * It's available as window.createChat at runtime.
- */
+// Type for chat configuration (compatible with @n8n/chat library)
+type ChatConfig = Parameters<typeof createChat>[0];
 
 /**
  * Default widget configuration
  */
-const DEFAULT_CONFIG: Partial<ChatConfig> = {
+const DEFAULT_CONFIG: ChatConfig = {
 	chatInputKey: 'chatInput',
 	chatSessionKey: 'sessionId',
 	metadata: {},
@@ -44,6 +44,7 @@ const DEFAULT_I18N: Record<string, I18nTranslations> = {
 		footer: '',
 		getStarted: 'Comenzar chat',
 		inputPlaceholder: 'Escribe tu mensaje...',
+		closeButtonTooltip: 'Cerrar',
 	},
 	en: {
 		title: 'Chat',
@@ -51,6 +52,7 @@ const DEFAULT_I18N: Record<string, I18nTranslations> = {
 		footer: '',
 		getStarted: 'Start chat',
 		inputPlaceholder: 'Type your message...',
+		closeButtonTooltip: 'Close',
 	},
 	de: {
 		title: 'Chat',
@@ -58,6 +60,7 @@ const DEFAULT_I18N: Record<string, I18nTranslations> = {
 		footer: '',
 		getStarted: 'Chat starten',
 		inputPlaceholder: 'Schreiben Sie Ihre Nachricht...',
+		closeButtonTooltip: 'Schließen',
 	},
 	fr: {
 		title: 'Chat',
@@ -65,6 +68,7 @@ const DEFAULT_I18N: Record<string, I18nTranslations> = {
 		footer: '',
 		getStarted: 'Démarrer le chat',
 		inputPlaceholder: 'Tapez votre message...',
+		closeButtonTooltip: 'Fermer',
 	},
 	pt: {
 		title: 'Chat',
@@ -72,6 +76,7 @@ const DEFAULT_I18N: Record<string, I18nTranslations> = {
 		footer: '',
 		getStarted: 'Iniciar chat',
 		inputPlaceholder: 'Digite sua mensagem...',
+		closeButtonTooltip: 'Fechar',
 	},
 };
 
@@ -116,7 +121,7 @@ function buildChatConfig(config: N8nChatConfig): ChatConfig | null {
 		webhookUrl: config.webhookUrl,
 		mode: config.mode || 'window',
 		showWelcomeScreen: config.showWelcomeScreen !== false,
-		defaultLanguage: language,
+		defaultLanguage: language as 'en',
 		loadPreviousSession: config.loadPreviousSession || false,
 		i18n: {
 			[language]: {
@@ -125,9 +130,10 @@ function buildChatConfig(config: N8nChatConfig): ChatConfig | null {
 				footer: translations.footer,
 				getStarted: translations.getStarted,
 				inputPlaceholder: config.inputPlaceholder || translations.inputPlaceholder,
+				closeButtonTooltip: translations.closeButtonTooltip,
 			},
 		},
-	} as ChatConfig;
+	};
 
 	// If fullscreen mode, add target
 	if (chatConfig.mode === 'fullscreen') {
@@ -168,19 +174,15 @@ function initN8nChat(): void {
 	}
 
 	try {
-		// Create chat widget
-		if (window.createChat) {
-			window.createChat(chatConfig);
-			console.log('n8n Chat Widget: Widget initialized successfully.');
-			
-			// Dispatch custom event
-			window.dispatchEvent(new CustomEvent('n8nChatWidgetLoaded', {
-				detail: { config: chatConfig }
-			}));
-		} else {
-			throw new Error('createChat function not available');
-		}
-	} catch (error) {
+		// Create chat widget using imported createChat function
+		createChat(chatConfig);
+		console.log('n8n Chat Widget: Widget initialized successfully.');
+		
+		// Dispatch custom event
+		window.dispatchEvent(new CustomEvent('n8nChatWidgetLoaded', {
+			detail: { config: chatConfig }
+		}));
+	} catch (error: unknown) {
 		console.error('n8n Chat Widget: Error initializing widget:', error);
 		
 		// Dispatch error event

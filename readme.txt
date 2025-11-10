@@ -1,18 +1,18 @@
-=== n8n Chat Widget ===
+=== Chat for n8n ===
 Contributors: alexcuadra
 Tags: chat, n8n, automation, ai, chatbot
 Requires at least: 5.8
-Tested up to: 6.7
+Tested up to: 6.9
 Stable tag: 1.0.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Añade el widget de chat impulsado por n8n a tu sitio web, conectando flujos de trabajo de automatización e IA.
+Add the n8n-powered chat widget to your website, connecting automation and AI workflows.
 
 == Description ==
 
-n8n Chat Widget te permite integrar fácilmente el widget de chat de n8n en tu sitio de WordPress, conectando tus flujos de trabajo de automatización e IA directamente con tus visitantes.
+Chat for n8n te permite integrar fácilmente el widget de chat de n8n en tu sitio de WordPress, conectando tus flujos de trabajo de automatización e IA directamente con tus visitantes.
 
 = Características Principales =
 
@@ -56,7 +56,7 @@ Usa el shortcode `[n8n_chat]` para insertar el chat en cualquier página o entra
 
 1. Inicia sesión en tu panel de administración de WordPress
 2. Ve a "Plugins" > "Añadir nuevo"
-3. Busca "n8n Chat Widget"
+3. Busca "Chat for n8n"
 4. Haz clic en "Instalar ahora" y luego en "Activar"
 
 = Instalación Manual =
@@ -67,7 +67,7 @@ Usa el shortcode `[n8n_chat]` para insertar el chat en cualquier página o entra
 
 = Configuración =
 
-1. Ve a "Ajustes" > "n8n Chat Widget"
+1. Ve a "Ajustes" > "Chat for n8n"
 2. Introduce la URL del webhook de tu nodo "Chat Trigger" de n8n
 3. Configura las opciones de apariencia según tus preferencias
 4. Guarda los cambios

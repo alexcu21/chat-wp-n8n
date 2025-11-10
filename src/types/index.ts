@@ -46,6 +46,7 @@ export interface I18nTranslations {
 	footer: string;
 	getStarted: string;
 	inputPlaceholder: string;
+	closeButtonTooltip: string;
 }
 
 /**
