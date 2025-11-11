@@ -29,53 +29,69 @@
 			placeholderText: $('#color-placeholder-text').val()
 		};
 
-		// Apply colors to preview
+		// Apply colors to preview (using actual n8n chat widget classes)
 		const $preview = $('#chat-preview-container');
 		
-		// Widget background
+		// Main chat background
 		$preview.css('background-color', colors.background);
 		
-		// Header
-		$preview.find('.preview-header').css({
+		// Chat Header
+		$preview.find('.chat-header').css({
 			'background-color': colors.headerBg,
 			'color': colors.headerText
 		});
 		
-		// Messages container
-		$preview.find('.preview-messages').css({
+		// Header elements
+		$preview.find('.chat-heading h1, .chat-heading p').css({
+			'color': colors.headerText
+		});
+		
+		// Close button
+		$preview.find('.chat-close-button').css({
+			'color': colors.headerText
+		});
+		
+		// Chat Body (messages area background)
+		$preview.find('.chat-body').css({
 			'background-color': colors.background
 		});
 		
 		// Bot messages
-		$preview.find('.bot-message .message-bubble').css({
+		$preview.find('.chat-message-from-bot').css({
 			'background-color': colors.botMessageBg,
 			'color': colors.botMessageText
 		});
 		
 		// User messages
-		$preview.find('.user-message .message-bubble').css({
+		$preview.find('.chat-message-from-user').css({
 			'background-color': colors.userMessageBg,
 			'color': colors.userMessageText
 		});
 		
-		// Input field
-		$preview.find('.preview-input input').css({
+		// Chat Footer
+		$preview.find('.chat-footer').css({
+			'background-color': colors.background
+		});
+		
+		// Input textarea
+		$preview.find('.chat-inputs textarea').css({
 			'background-color': colors.inputBg,
 			'border-color': colors.inputBorder,
 			'color': colors.inputText
 		});
 		
-		// Input placeholder (using a trick with ::placeholder)
+		// Input placeholder (CSS injection)
 		const placeholderStyle = `
-			#chat-preview-container .preview-input input::placeholder {
-				color: ${colors.placeholderText};
+			#chat-preview-container .chat-inputs textarea::placeholder {
+				color: ${colors.placeholderText} !important;
 				opacity: 1;
 			}
-			#chat-preview-container .preview-input input::-webkit-input-placeholder {
+			#chat-preview-container .chat-inputs textarea::-webkit-input-placeholder {
 				color: ${colors.placeholderText};
 			}
-			#chat-preview-container .preview-input input::-moz-placeholder {
+			#chat-preview-container .chat-inputs textarea::-moz-placeholder {
 				color: ${colors.placeholderText};
+				opacity: 1;
 			}
 		`;
 		
@@ -88,8 +104,14 @@
 		$styleTag.html(placeholderStyle);
 		
 		// Send button
-		$preview.find('.preview-send-button').css({
-			'background-color': colors.sendButton
+		$preview.find('.chat-input-send-button').css({
+			'background-color': 'transparent',
+			'color': colors.sendButton
+		});
+		
+		// Send button SVG icon
+		$preview.find('.chat-input-send-button svg').css({
+			'stroke': colors.sendButton
 		});
 	}
 

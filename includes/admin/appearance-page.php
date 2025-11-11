@@ -284,37 +284,69 @@ function chat_for_n8n_appearance_page() {
 
 			<!-- Live Preview Panel -->
 			<div class="color-preview-panel">
-				<h2><?php esc_html_e( 'Preview', 'chat-for-n8n' ); ?></h2>
+				<h2><?php esc_html_e( 'Live Preview', 'chat-for-n8n' ); ?></h2>
 				<p class="description">
 					<?php esc_html_e( 'See your color changes in real-time', 'chat-for-n8n' ); ?>
 				</p>
 				
-				<div id="chat-preview-container" class="preview-widget">
-					<div class="preview-header">
-						<span class="preview-title"><?php esc_html_e( 'Chat Preview', 'chat-for-n8n' ); ?></span>
-					</div>
-					<div class="preview-messages">
-						<div class="preview-message bot-message">
-							<div class="message-bubble">
-								<?php esc_html_e( 'Hello! How can I help you today?', 'chat-for-n8n' ); ?>
+				<div id="chat-preview-container" class="n8n-chat chat-layout">
+					<!-- Chat Header -->
+					<div class="chat-header">
+						<div class="chat-heading">
+							<div>
+								<h1 style="margin: 0; font-size: 1.2em; font-weight: 600;"><?php echo esc_html( get_option( 'n8n_chat_widget_title', 'Chat' ) ); ?></h1>
+								<?php if ( get_option( 'n8n_chat_widget_subtitle' ) ) : ?>
+									<p style="margin: 0; font-size: 0.9em; opacity: 0.9;"><?php echo esc_html( get_option( 'n8n_chat_widget_subtitle', '' ) ); ?></p>
+								<?php endif; ?>
 							</div>
-						</div>
-						<div class="preview-message user-message">
-							<div class="message-bubble">
-								<?php esc_html_e( 'I have a question about your services.', 'chat-for-n8n' ); ?>
-							</div>
-						</div>
-						<div class="preview-message bot-message">
-							<div class="message-bubble">
-								<?php esc_html_e( 'I\'d be happy to help! What would you like to know?', 'chat-for-n8n' ); ?>
-							</div>
+							<button class="chat-close-button" type="button" disabled>
+								<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+									<path d="M18 6L6 18M6 6l12 12"/>
+								</svg>
+							</button>
 						</div>
 					</div>
-					<div class="preview-input">
-						<input type="text" placeholder="<?php esc_attr_e( 'Type your message...', 'chat-for-n8n' ); ?>" disabled>
-						<button class="preview-send-button">
-							<span>→</span>
-						</button>
+					
+					<!-- Chat Body (Messages) -->
+					<div class="chat-body">
+						<div class="chat-messages-list">
+							<!-- Bot Message -->
+							<div class="chat-message chat-message-from-bot">
+								<div class="chat-message-markdown">
+									<p><?php esc_html_e( 'Hello! How can I help you today?', 'chat-for-n8n' ); ?></p>
+								</div>
+							</div>
+							
+							<!-- User Message -->
+							<div class="chat-message chat-message-from-user">
+								<div class="chat-message-markdown">
+									<p><?php esc_html_e( 'I have a question about your services.', 'chat-for-n8n' ); ?></p>
+								</div>
+							</div>
+							
+							<!-- Bot Message -->
+							<div class="chat-message chat-message-from-bot">
+								<div class="chat-message-markdown">
+									<p><?php esc_html_e( 'I\'d be happy to help! What would you like to know?', 'chat-for-n8n' ); ?></p>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<!-- Chat Footer (Input) -->
+					<div class="chat-footer">
+						<div class="chat-input">
+							<div class="chat-inputs">
+								<textarea placeholder="<?php echo esc_attr( get_option( 'n8n_chat_widget_input_placeholder', 'Type your message...' ) ); ?>" disabled rows="1"></textarea>
+								<div class="chat-inputs-controls">
+									<button class="chat-input-send-button" type="button" disabled>
+										<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+											<path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+										</svg>
+									</button>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
