@@ -1,5 +1,6 @@
 === Chat for n8n ===
 Contributors: alexcu21
+Donate link: https://wise.com/pay/me/alvaroc468
 Tags: chat, n8n, automation, ai, chatbot
 Requires at least: 5.8
 Tested up to: 6.9
@@ -166,7 +167,7 @@ Initial plugin release. Install and start automating your conversations!
 * [n8n Website](https://n8n.io/)
 * [n8n Documentation](https://docs.n8n.io/)
 * [Chat Trigger Documentation](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-langchain.chattrigger/)
-* [GitHub Repository](https://github.com/alexcuadra/chat-for-n8n)
+* [GitHub Repository](https://github.com/alexcuadra/chat-wp-n8n)
 
 = Contributing =
 
