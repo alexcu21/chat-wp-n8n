@@ -43,7 +43,12 @@ jobs:
           node-version: 20
 
       - name: Install Node dependencies
-        run: npm ci
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
 
       - name: Run TypeScript type check
         run: npm run type-check
@@ -82,7 +87,12 @@ jobs:
           node-version: 20
 
       - name: Install Node dependencies
-        run: npm ci
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
 
       - name: Build Production Bundle
         run: npm run build

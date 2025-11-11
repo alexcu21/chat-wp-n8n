@@ -34,7 +34,7 @@ $RECYCLE_BIN/
 *~
 
 # NPM/Yarn
-package-lock.json
+# package-lock.json is tracked for CI/CD reproducibility
 yarn.lock
 .pnpm-debug.log*
 
@@ -47,4 +47,9 @@ coverage/
 vite.config.js.timestamp-*
 .qodcache/
 .qodo/
+
+# Documentation (development only)
 docs/
+
+# Releases directory (ZIPs are created here)
+releases/
