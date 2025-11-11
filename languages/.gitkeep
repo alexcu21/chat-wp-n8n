@@ -1,0 +1,3 @@
+# Translation files will be placed here
+# Generate .pot file with: wp i18n make-pot . languages/chat-for-n8n.pot
+

@@ -7,7 +7,6 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
 import legacy from '@vitejs/plugin-legacy';
-import compression from 'vite-plugin-compression';
 
 export default defineConfig({
 	// Build configuration
@@ -84,17 +83,9 @@ export default defineConfig({
 			modernPolyfills: true,
 		}),
 		
-		// Gzip compression
-		compression({
-			algorithm: 'gzip',
-			ext: '.gz',
-		}),
-		
-		// Brotli compression
-		compression({
-			algorithm: 'brotliCompress',
-			ext: '.br',
-		}),
+		// Note: Compression disabled for WordPress.org compliance
+		// WordPress.org does not allow .gz or .br files in plugins
+		// Server-side compression should be handled by hosting/CDN
 	],
 	
 	// Server configuration for development
