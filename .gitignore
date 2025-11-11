@@ -47,3 +47,4 @@ coverage/
 vite.config.js.timestamp-*
 .qodcache/
 .qodo/
+docs/

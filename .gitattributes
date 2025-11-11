@@ -1,0 +1,59 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Source code
+*.php text eol=lf
+*.js text eol=lf
+*.ts text eol=lf
+*.jsx text eol=lf
+*.tsx text eol=lf
+*.css text eol=lf
+*.scss text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.xml text eol=lf
+
+# Documentation
+*.md text eol=lf
+*.txt text eol=lf
+
+# Config files
+.editorconfig text eol=lf
+.gitignore text eol=lf
+.gitattributes text eol=lf
+
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.mov binary
+*.mp4 binary
+*.mp3 binary
+*.zip binary
+*.gz binary
+*.br binary
+
+# Archives generated from Git exports
+export-ignore .github/
+export-ignore .gitignore
+export-ignore .gitattributes
+export-ignore .editorconfig
+export-ignore node_modules/
+export-ignore src/
+export-ignore scripts/
+export-ignore docs/
+export-ignore vendor/
+export-ignore releases/
+export-ignore package.json
+export-ignore package-lock.json
+export-ignore composer.json
+export-ignore composer.lock
+export-ignore tsconfig.json
+export-ignore vite.config.js
+export-ignore postcss.config.js
+export-ignore DEVELOPMENT.md
+export-ignore MIGRATION-SUMMARY.md
+

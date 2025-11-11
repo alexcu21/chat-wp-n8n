@@ -22,13 +22,17 @@ const outputFile = path.join(outputDir, `${pluginName}-v${version}.zip`);
 // Files and directories to include
 const includePatterns = [
 	'dist/**/*',
+	'includes/**/*',
+	'assets/**/*',
+	'languages/**/*',
 	'*.php',
 	'*.css',
 	'*.js',
 	'*.txt',
-	'*.md',
 	'LICENSE',
 	'index.php',
+	'README.md',
+	'CHANGELOG.md',
 ];
 
 // Files and directories to exclude
@@ -37,6 +41,8 @@ const excludePatterns = [
 	'src',
 	'scripts',
 	'releases',
+	'docs',
+	'vendor',
 	'.git',
 	'.github',
 	'.vscode',
@@ -47,6 +53,8 @@ const excludePatterns = [
 	'*.lock',
 	'package.json',
 	'package-lock.json',
+	'composer.json',
+	'composer.lock',
 	'tsconfig.json',
 	'vite.config.js',
 	'postcss.config.js',
@@ -55,8 +63,8 @@ const excludePatterns = [
 	'.editorconfig',
 	'.nvmrc',
 	'.gitignore',
-	'.quick-start.md',
 	'DEVELOPMENT.md',
+	'MIGRATION-SUMMARY.md',
 ];
 
 /**
@@ -137,6 +145,27 @@ async function createBundle() {
 	if (fs.existsSync(distDir)) {
 		archive.directory(distDir, `${pluginName}/dist`);
 		console.log(`  ✓ dist/`);
+	}
+	
+	// Add includes directory
+	const includesDir = path.join(pluginDir, 'includes');
+	if (fs.existsSync(includesDir)) {
+		archive.directory(includesDir, `${pluginName}/includes`);
+		console.log(`  ✓ includes/`);
+	}
+	
+	// Add assets directory
+	const assetsDir = path.join(pluginDir, 'assets');
+	if (fs.existsSync(assetsDir)) {
+		archive.directory(assetsDir, `${pluginName}/assets`);
+		console.log(`  ✓ assets/`);
+	}
+	
+	// Add languages directory
+	const languagesDir = path.join(pluginDir, 'languages');
+	if (fs.existsSync(languagesDir)) {
+		archive.directory(languagesDir, `${pluginName}/languages`);
+		console.log(`  ✓ languages/`);
 	}
 	
 	// Finalize the archive

@@ -1,0 +1,140 @@
+name: WordPress CI/CD Workflow
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write  # Needed for release creation
+
+jobs:
+  lint-and-build:
+    name: Lint & QA (Pull Request)
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+          tools: composer
+          coverage: none
+
+      - name: Install Composer dependencies
+        run: composer install --prefer-dist --no-progress
+
+      - name: Run PHP Coding Standards
+        run: composer lint:wpcs || true  # Allow to continue even with warnings
+
+      - name: Check PHP syntax
+        run: composer lint:php
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Run TypeScript type check
+        run: npm run type-check
+
+      - name: Lint SCSS files
+        run: npm run lint:scss
+
+      - name: Lint JavaScript/TypeScript files
+        run: npm run lint:js || true  # Allow to continue with warnings
+
+      - name: Build test
+        run: npm run build
+
+  release:
+    name: Build & Release (Main)
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+          tools: composer
+          coverage: none
+
+      - name: Install Composer dependencies (production)
+        run: composer install --no-dev --prefer-dist --no-progress --optimize-autoloader
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Build Production Bundle
+        run: npm run build
+
+      - name: Create Plugin ZIP
+        run: npm run bundle
+
+      - name: Get plugin version from package.json
+        id: package-version
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          echo "version=v${VERSION}" >> $GITHUB_OUTPUT
+          echo "Plugin version: v${VERSION}"
+
+      - name: Find created ZIP file
+        id: find-zip
+        run: |
+          ZIP_FILE=$(find releases -name "*.zip" -type f | head -n 1)
+          if [ -z "$ZIP_FILE" ]; then
+            echo "Error: No ZIP file found in releases directory"
+            exit 1
+          fi
+          echo "zip_file=$ZIP_FILE" >> $GITHUB_OUTPUT
+          echo "Found ZIP: $ZIP_FILE"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.package-version.outputs.version }}
+          name: "Chat for n8n ${{ steps.package-version.outputs.version }}"
+          body: |
+            ## Chat for n8n - Release ${{ steps.package-version.outputs.version }}
+            
+            ### 🚀 New Features
+            - Top-level admin menu with custom icon
+            - 14 customizable colors with live preview
+            - Advanced display rules for page targeting
+            
+            ### 📦 Installation
+            1. Download the ZIP file below
+            2. Go to WordPress Admin → Plugins → Add New → Upload Plugin
+            3. Choose the ZIP file and click Install Now
+            4. Activate the plugin
+            
+            ### 📚 Documentation
+            See the [documentation](https://github.com/${{ github.repository }}) for full details.
+            
+            ---
+            **Built:** ${{ github.sha }}
+          files: ${{ steps.find-zip.outputs.zip_file }}
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
