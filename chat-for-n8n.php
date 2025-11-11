@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Chat for n8n
  * Description: Add the n8n-powered chat widget to your website, connecting automation and AI workflows.
- * Version: 1.0.0
+ * Version: 1.1.0
  * Author: Alex Cuadra
  * Author URI: https://alexcuadra.dev
  * License: GPL-2.0-or-later
