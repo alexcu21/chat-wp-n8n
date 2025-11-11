@@ -1,9 +1,9 @@
 === Chat for n8n ===
-Contributors: alexcuadra
+Contributors: alexcu21
 Tags: chat, n8n, automation, ai, chatbot
 Requires at least: 5.8
 Tested up to: 6.9
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -12,151 +12,170 @@ Add the n8n-powered chat widget to your website, connecting automation and AI wo
 
 == Description ==
 
-Chat for n8n te permite integrar fácilmente el widget de chat de n8n en tu sitio de WordPress, conectando tus flujos de trabajo de automatización e IA directamente con tus visitantes.
+Chat for n8n allows you to easily integrate the n8n chat widget into your WordPress site, connecting your automation and AI workflows directly with your visitors.
 
-= Características Principales =
+= Key Features =
 
-* **Integración Sencilla**: Conecta tu sitio WordPress con n8n en minutos
-* **Modo Flotante**: Widget flotante en la esquina de tu sitio
-* **Modo Pantalla Completa**: Inserta el chat en cualquier página usando shortcodes
-* **Multiidioma**: Soporte para Español, Inglés, Alemán, Francés y Portugués
-* **Personalizable**: Configura mensajes de bienvenida y apariencia
-* **Totalmente Responsive**: Funciona perfectamente en todos los dispositivos
-* **Accesible**: Cumple con estándares de accesibilidad web
-* **Sin Dependencias Externas**: Todo se carga desde CDN confiables
+* **Easy Integration**: Connect your WordPress site with n8n in minutes
+* **Floating Window Mode**: Floating widget in the corner of your site
+* **Fullscreen Mode**: Insert chat on any page using shortcodes
+* **Multi-language**: Support for Spanish, English, German, French, and Portuguese
+* **Color Customization**: Customize 14 different colors with live preview
+* **Display Rules**: Control where the widget appears on your site
+* **Customizable**: Configure welcome messages and appearance
+* **Fully Responsive**: Works perfectly on all devices
+* **Accessible**: Meets web accessibility standards
+* **Top-Level Menu**: Organized admin interface with dashboard
 
-= ¿Qué es n8n? =
+= What is n8n? =
 
-n8n es una plataforma de automatización de flujos de trabajo extensible y de código abierto. Te permite conectar cualquier cosa con todo, incluyendo APIs, bases de datos, servicios de IA, y más.
+n8n is an extensible, open-source workflow automation platform. It allows you to connect anything to everything, including APIs, databases, AI services, and more.
 
-= Cómo Funciona =
+= How It Works =
 
-1. Crea un workflow en n8n con un nodo "Chat Trigger"
-2. Copia la URL del webhook del nodo "Chat Trigger"
-3. Pega la URL en la configuración del plugin
-4. ¡El widget de chat aparecerá automáticamente en tu sitio!
+1. Create a workflow in n8n with a "Chat Trigger" node
+2. Copy the webhook URL from the "Chat Trigger" node
+3. Paste the URL in the plugin settings
+4. The chat widget will appear automatically on your site!
 
-= Casos de Uso =
+= Use Cases =
 
-* Asistentes virtuales de atención al cliente
-* Chatbots de ventas y marketing
-* Sistemas de soporte técnico automatizados
-* Generación de leads cualificados
-* Consultas y reservas automatizadas
-* Integración con sistemas CRM
-* Asistentes con IA (ChatGPT, Claude, etc.)
+* Virtual customer service assistants
+* Sales and marketing chatbots
+* Automated technical support systems
+* Qualified lead generation
+* Automated queries and bookings
+* CRM system integration
+* AI assistants (ChatGPT, Claude, etc.)
 
 = Shortcode =
 
-Usa el shortcode `[n8n_chat]` para insertar el chat en cualquier página o entrada cuando uses el modo "Pantalla Completa".
+Use the `[n8n_chat]` shortcode to insert the chat on any page or post when using "Fullscreen" mode.
 
 == Installation ==
 
-= Instalación Automática =
+= Automatic Installation =
 
-1. Inicia sesión en tu panel de administración de WordPress
-2. Ve a "Plugins" > "Añadir nuevo"
-3. Busca "Chat for n8n"
-4. Haz clic en "Instalar ahora" y luego en "Activar"
+1. Log in to your WordPress admin panel
+2. Go to "Plugins" > "Add New"
+3. Search for "Chat for n8n"
+4. Click "Install Now" and then "Activate"
 
-= Instalación Manual =
+= Manual Installation =
 
-1. Descarga el plugin
-2. Sube la carpeta `chat-for-n8n` al directorio `/wp-content/plugins/`
-3. Activa el plugin desde el menú "Plugins" en WordPress
+1. Download the plugin
+2. Upload the `chat-for-n8n` folder to the `/wp-content/plugins/` directory
+3. Activate the plugin from the "Plugins" menu in WordPress
 
-= Configuración =
+= Configuration =
 
-1. Ve a "Ajustes" > "Chat for n8n"
-2. Introduce la URL del webhook de tu nodo "Chat Trigger" de n8n
-3. Configura las opciones de apariencia según tus preferencias
-4. Guarda los cambios
+1. Go to "Chat for n8n" in the WordPress admin menu
+2. Click "Settings"
+3. Enter the webhook URL from your n8n "Chat Trigger" node
+4. Configure appearance options according to your preferences
+5. Save changes
 
-Para más información sobre cómo crear un workflow de chat en n8n, consulta la [documentación oficial de n8n](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-langchain.chattrigger/).
+For more information on how to create a chat workflow in n8n, check the [official n8n documentation](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-langchain.chattrigger/).
 
 == Frequently Asked Questions ==
 
-= ¿Necesito una cuenta de n8n? =
+= Do I need an n8n account? =
 
-Sí, necesitas tener n8n instalado (puede ser auto-hospedado o usar n8n.cloud) y crear un workflow con un nodo "Chat Trigger".
+Yes, you need to have n8n installed (either self-hosted or using n8n.cloud) and create a workflow with a "Chat Trigger" node.
 
-= ¿Es gratis? =
+= Is it free? =
 
-El plugin es 100% gratuito. n8n ofrece tanto versiones auto-hospedadas gratuitas como planes de pago en n8n.cloud.
+The plugin is 100% free. n8n offers both free self-hosted versions and paid plans on n8n.cloud.
 
-= ¿Puedo personalizar el diseño del chat? =
+= Can I customize the chat design? =
 
-Sí, puedes personalizar el modo de visualización, idioma, mensajes de bienvenida y más desde la página de configuración.
+Yes! Version 1.1.0 includes a complete color customization system with 14 customizable colors, live preview, and display rules to control where the widget appears.
 
-= ¿Funciona en dispositivos móviles? =
+= Does it work on mobile devices? =
 
-Sí, el widget es totalmente responsive y funciona perfectamente en smartphones y tablets.
+Yes, the widget is fully responsive and works perfectly on smartphones and tablets.
 
-= ¿Puedo usar múltiples widgets en diferentes páginas? =
+= Can I use multiple widgets on different pages? =
 
-Actualmente, el plugin soporta un widget por sitio. Para múltiples widgets, puedes crear diferentes instancias con configuraciones específicas.
+Currently, the plugin supports one widget per site. You can control where it appears using the Display Rules feature.
 
-= ¿Dónde puedo obtener soporte? =
+= Where can I get support? =
 
-Puedes obtener soporte en los foros de WordPress.org o visitar la [documentación de n8n](https://docs.n8n.io/).
+You can get support in the WordPress.org forums or visit the [n8n documentation](https://docs.n8n.io/).
 
-= ¿Es compatible con GDPR? =
+= Is it GDPR compliant? =
 
-El plugin en sí no recopila datos. La conformidad con GDPR dependerá de cómo configures tu workflow en n8n. Asegúrate de revisar las políticas de privacidad de n8n y configurar tu workflow adecuadamente.
+The plugin itself does not collect data. GDPR compliance will depend on how you configure your workflow in n8n. Make sure to review n8n's privacy policies and configure your workflow appropriately.
 
-= ¿Puedo integrar IA como ChatGPT? =
+= Can I integrate AI like ChatGPT? =
 
-¡Sí! n8n soporta integración con múltiples servicios de IA incluyendo OpenAI (ChatGPT), Anthropic (Claude), y muchos más a través de sus nodos.
+Yes! n8n supports integration with multiple AI services including OpenAI (ChatGPT), Anthropic (Claude), and many more through its nodes.
 
 == Screenshots ==
 
-1. Página de configuración del plugin en el panel de administración
-2. Widget de chat en modo flotante en el sitio web
-3. Chat en modo pantalla completa usando shortcode
-4. Ejemplo de conversación con el chatbot
-5. Opciones de personalización disponibles
+1. Dashboard page with widget status and quick actions
+2. Settings page with webhook configuration
+3. Color customization page with live preview
+4. Display rules for page targeting
+5. Floating chat widget on the website
+6. Fullscreen chat using shortcode
 
 == Changelog ==
 
+= 1.1.0 =
+* Added top-level admin menu with custom chat icon
+* Added color customization system with 14 colors
+* Added live preview for color changes
+* Added display rules for page targeting
+* Added dashboard page with widget status
+* Reorganized admin interface for better UX
+* Bundled @n8n/chat library (WordPress.org compliant)
+* Improved security and sanitization
+* All strings now in English (translatable to other languages)
+* Fixed text domain consistency
+* Fixed external resource loading issues
+
 = 1.0.0 =
-* Lanzamiento inicial
-* Soporte para modo flotante y pantalla completa
-* Configuración de webhook de n8n
-* Soporte multiidioma (ES, EN, DE, FR, PT)
-* Mensajes de bienvenida personalizables
-* Integración completa con la librería @n8n/chat
-* Cumplimiento con estándares WPCS y PHPCS
-* Totalmente responsive y accesible
+* Initial release
+* Support for floating and fullscreen modes
+* n8n webhook configuration
+* Multi-language support (ES, EN, DE, FR, PT)
+* Customizable welcome messages
+* Complete integration with @n8n/chat library
+* WPCS and PHPCS compliance
+* Fully responsive and accessible
 
 == Upgrade Notice ==
 
+= 1.1.0 =
+Major update with color customization, display rules, and improved admin interface. Fully backward compatible.
+
 = 1.0.0 =
-Lanzamiento inicial del plugin. ¡Instala y comienza a automatizar tus conversaciones!
+Initial plugin release. Install and start automating your conversations!
 
 == Additional Information ==
 
-= Requisitos Técnicos =
+= Technical Requirements =
 
-* WordPress 5.8 o superior
-* PHP 7.4 o superior
-* Un workflow de n8n con nodo "Chat Trigger" configurado
+* WordPress 5.8 or higher
+* PHP 7.4 or higher
+* An n8n workflow with "Chat Trigger" node configured
 
-= Recursos Útiles =
+= Useful Resources =
 
-* [Sitio web de n8n](https://n8n.io/)
-* [Documentación de n8n](https://docs.n8n.io/)
-* [Documentación del Chat Trigger](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-langchain.chattrigger/)
-* [Repositorio de GitHub](https://github.com/alexcuadra/chat-for-n8n)
+* [n8n Website](https://n8n.io/)
+* [n8n Documentation](https://docs.n8n.io/)
+* [Chat Trigger Documentation](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-langchain.chattrigger/)
+* [GitHub Repository](https://github.com/alexcuadra/chat-for-n8n)
 
-= Contribuir =
+= Contributing =
 
-Este plugin es de código abierto. Si quieres contribuir, reportar bugs o solicitar características, visita nuestro repositorio en GitHub.
+This plugin is open source. If you want to contribute, report bugs, or request features, visit our GitHub repository.
 
-= Privacidad =
+= Privacy =
 
-Este plugin no recopila ni almacena ningún dato personal de los usuarios de tu sitio. Todas las conversaciones se procesan a través de tu instancia de n8n según la configuración de tu workflow.
+This plugin does not collect or store any personal data from your site's users. All conversations are processed through your n8n instance according to your workflow configuration.
 
-= Licencia =
+= License =
 
-Este plugin es software libre distribuido bajo la licencia GPL v2 o posterior.
-
+This plugin is free software distributed under the GPL v2 or later license.
