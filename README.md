@@ -1,189 +1,317 @@
-# n8n Chat Widget para WordPress
+# Chat for n8n - WordPress Plugin
 
-Plugin de WordPress que integra el widget de chat de n8n en tu sitio web, permitiendo conectar flujos de trabajo de automatización e IA directamente con tus visitantes.
+WordPress plugin that integrates the n8n chat widget into your website, allowing you to connect automation and AI workflows directly with your visitors.
 
-## 🚀 Instalación
+## 🚀 Installation
 
-### Desde WordPress
+### From WordPress
 
-1. Descarga el plugin o clónalo desde GitHub
-2. Sube la carpeta `chat-for-n8n` a `/wp-content/plugins/`
-3. Activa el plugin desde el menú "Plugins" en WordPress
-4. Ve a **Ajustes → n8n Chat Widget** para configurarlo
+1. Download the plugin or clone it from GitHub
+2. Upload the `chat-for-n8n` folder to `/wp-content/plugins/`
+3. Activate the plugin from the "Plugins" menu in WordPress
+4. Go to **Chat for n8n → Settings** to configure it
 
-### Configuración Rápida
+### Quick Setup
 
-1. **Crea un workflow en n8n:**
-   - Añade un nodo "Chat Trigger" a tu workflow
-   - Activa el workflow
-   - Copia la URL del webhook (debe terminar en `/chat`)
+1. **Create a workflow in n8n:**
+   - Add a "Chat Trigger" node to your workflow
+   - Activate the workflow
+   - Copy the webhook URL (should end with `/chat`)
 
-2. **Configura el plugin:**
-   - Ve a **Ajustes → n8n Chat Widget**
-   - Pega la URL del webhook
-   - Configura las opciones de apariencia
-   - Guarda los cambios
+2. **Configure the plugin:**
+   - Go to **Chat for n8n → Settings**
+   - Paste the webhook URL
+   - Configure appearance options
+   - Save changes
 
-3. **¡Listo!** El widget aparecerá automáticamente en tu sitio
+3. **Done!** The widget will appear automatically on your site
 
-## ⚙️ Opciones de Configuración
+## ⚙️ Configuration Options
 
-### Configuración Principal
+### Main Settings
 
-- **URL del Webhook**: La URL del nodo "Chat Trigger" de tu workflow en n8n
-  - Formato: `https://tu-n8n.app/webhook/tu-id/chat`
+- **Webhook URL**: The URL from your n8n "Chat Trigger" node
+  - Format: `https://your-n8n.app/webhook/your-id/chat`
 
-### Configuración de Apariencia
+### Appearance Settings
 
-- **Modo del Widget:**
-  - **Ventana Flotante**: Widget en la esquina inferior derecha (predeterminado)
-  - **Pantalla Completa**: Usa el shortcode `[n8n_chat]` en una página
+- **Widget Mode:**
+  - **Floating Window**: Widget in the bottom right corner (default)
+  - **Fullscreen**: Use the `[n8n_chat]` shortcode on a page
 
-- **Idioma:** Español, Inglés, Alemán, Francés, Portugués
+- **Language:** English, Spanish, German, French, Portuguese
 
-- **Pantalla de Bienvenida:** Mostrar/ocultar mensaje de bienvenida
+- **Welcome Screen:** Show/hide welcome message
 
-- **Mensajes Iniciales:** Personaliza el mensaje de bienvenida
+- **Initial Messages:** Customize the welcome message
 
-## 📝 Uso del Shortcode
+- **Title & Subtitle:** Customize the chat header
 
-Para insertar el chat en una página específica:
+- **Input Placeholder:** Custom placeholder text
+
+### Color Customization
+
+Customize 14 different colors with live preview:
+- Background, Primary, and Text colors
+- Bot and User message colors
+- Header colors
+- Input field colors
+
+### Display Rules
+
+Control where the widget appears:
+- Display on all pages, selected pages only, or all except selected
+- Page type targeting (Homepage, Posts, Pages, Archives, etc.)
+- Specific page/post selection
+- Category and tag targeting
+- URL-based rules (contains, starts with, ends with, regex)
+
+## 📝 Using the Shortcode
+
+To insert the chat on a specific page:
 
 ```
 [n8n_chat]
 ```
 
-**Nota:** Cambia el modo a "Pantalla Completa" en los ajustes para usar el shortcode.
+**Note:** Change the mode to "Fullscreen" in settings to use the shortcode.
 
-## 🛠️ Requisitos Técnicos
+## 🛠️ Technical Requirements
 
-- **WordPress:** 5.8 o superior
-- **PHP:** 7.4 o superior
-- **n8n:** Instancia con nodo "Chat Trigger" configurado
+- **WordPress:** 5.8 or higher
+- **PHP:** 7.4 or higher
+- **n8n:** Instance with "Chat Trigger" node configured
 
-## 🔧 Solución de Problemas
+## 🔧 Troubleshooting
 
-### El widget no aparece
+### Widget doesn't appear
 
-1. **Verifica la URL del webhook:**
-   - Asegúrate de que esté correctamente configurada en **Ajustes → n8n Chat Widget**
-   - Debe ser accesible públicamente
-   - Debe terminar con `/chat`
+1. **Verify the webhook URL:**
+   - Make sure it's correctly configured in **Chat for n8n → Settings**
+   - Must be publicly accessible
+   - Should end with `/chat`
 
-2. **Limpia el caché:**
-   - Limpia el caché de WordPress (si tienes plugin de caché)
-   - Limpia el caché del navegador (Ctrl+Shift+R o Cmd+Shift+R)
+2. **Check display rules:**
+   - Go to **Chat for n8n → Display Rules**
+   - Verify the widget is set to display on the current page
 
-3. **Revisa la consola del navegador:**
-   - Presiona F12 para abrir herramientas de desarrollo
-   - Ve a la pestaña "Console"
-   - Busca errores relacionados con "n8n Chat Widget"
+3. **Clear cache:**
+   - Clear WordPress cache (if using a cache plugin)
+   - Clear browser cache (Ctrl+Shift+R or Cmd+Shift+R)
 
-4. **Verifica que los scripts se carguen:**
-   - En herramientas de desarrollo, ve a "Network"
-   - Recarga la página
-   - Busca `chat.bundle.es.js` y `chat-for-n8n.js`
-   - Ambos deben cargar con status 200
+4. **Check browser console:**
+   - Press F12 to open developer tools
+   - Go to "Console" tab
+   - Look for errors related to "n8n Chat Widget"
 
-### Errores comunes
+5. **Verify scripts are loading:**
+   - In developer tools, go to "Network" tab
+   - Reload the page
+   - Look for `main.js` and `chat-for-n8n.css`
+   - Both should load with status 200
 
-**Error: "URL del Webhook no configurada"**
-- Configura la URL en **Ajustes → n8n Chat Widget**
+### Common Errors
 
-**Error: "createChat no está disponible"**
-- Verifica que el CDN de n8n esté accesible
-- Revisa si hay conflictos con otros plugins
+**Error: "Webhook URL not configured"**
+- Configure the URL in **Chat for n8n → Settings**
 
-**El widget no se conecta con n8n**
-- Verifica que tu workflow en n8n esté activo
-- Asegúrate de que la URL del webhook sea correcta
-- Revisa los logs de n8n para ver si las peticiones llegan
+**Error: "createChat is not available"**
+- Verify the @n8n/chat library is bundled (check dist/ folder)
+- Check for conflicts with other plugins
 
-## 🎨 Personalización
+**Widget doesn't connect to n8n**
+- Verify your n8n workflow is active
+- Make sure the webhook URL is correct
+- Check n8n logs to see if requests are arriving
 
-### CSS Personalizado
+### Colors not applying
 
-Puedes añadir CSS personalizado en tu tema para modificar la apariencia:
+1. Clear browser cache
+2. Check **Chat for n8n → Appearance** for saved colors
+3. Inspect element to verify CSS variables are injected
+4. Check for theme CSS conflicts
+
+## 🎨 Customization
+
+### Custom CSS
+
+You can add custom CSS in your theme to modify the appearance:
 
 ```css
-/* Cambiar posición del widget */
-.n8n-chat-window {
+/* Change widget position */
+.chat-window-wrapper {
     bottom: 30px !important;
     right: 30px !important;
 }
 
-/* Cambiar colores */
-#n8n-chat-container {
-    border-color: #your-color !important;
+/* Customize specific elements */
+.n8n-chat .chat-header {
+    font-size: 18px !important;
 }
 ```
 
-### Configuración Avanzada
+### Developer Hooks
 
-El plugin sigue las mejores prácticas de WordPress y es compatible con:
-- ✅ Multisitio
-- ✅ Temas personalizados
+#### Filters
+
+```php
+// Modify default colors
+add_filter( 'chat_for_n8n_default_colors', function( $colors ) {
+    $colors['primary'] = '#ff0000';
+    return $colors;
+});
+
+// Modify display logic
+add_filter( 'chat_for_n8n_should_display', function( $should_display, $rules ) {
+    // Custom logic here
+    return $should_display;
+}, 10, 2);
+
+// Modify custom CSS
+add_filter( 'chat_for_n8n_custom_css', function( $css, $colors ) {
+    $css .= ".custom-class { color: {$colors['primary']}; }";
+    return $css;
+}, 10, 2);
+```
+
+### Advanced Configuration
+
+The plugin follows WordPress best practices and is compatible with:
+- ✅ Multisite
+- ✅ Custom themes
 - ✅ Page builders (Elementor, Divi, etc.)
-- ✅ Plugins de caché
-- ✅ WPML y Polylang
+- ✅ Cache plugins
+- ✅ WPML and Polylang
 
-## 📚 Estructura de Archivos
+## 📚 File Structure
 
 ```
 chat-for-n8n/
-├── chat-for-n8n.php     # Archivo principal del plugin
-├── chat-for-n8n.js      # Script de inicialización (módulo ES6)
-├── chat-for-n8n.css     # Estilos personalizados
-├── readme.txt           # Documentación para WordPress.org
-├── README.md            # Este archivo
-├── CHANGELOG.md         # Historial de cambios
-├── LICENSE              # Licencia GPL v2
-└── index.php            # Seguridad contra browsing
+├── assets/
+│   └── admin/              # Admin page assets
+│       ├── css/
+│       │   └── appearance.css
+│       └── js/
+│           ├── color-picker.js
+│           └── display-rules.js
+├── dist/                   # Built production files
+│   ├── main.js
+│   └── chat-for-n8n.css
+├── includes/
+│   └── admin/              # Admin page templates
+│       ├── dashboard-page.php
+│       ├── settings-page.php
+│       ├── appearance-page.php
+│       └── display-rules-page.php
+├── languages/              # Translation files
+├── src/                    # Source files (TypeScript/SCSS)
+│   ├── js/
+│   │   └── main.ts
+│   ├── scss/
+│   └── types/
+├── chat-for-n8n.php        # Main plugin file
+├── readme.txt              # WordPress.org documentation
+├── README.md               # This file
+├── CHANGELOG.md            # Version history
+├── LICENSE                 # GPL v2 license
+└── index.php               # Security against direct access
 ```
 
-## 🔐 Seguridad
+## 🔐 Security
 
-- ✅ Todas las entradas se sanitizan y validan
-- ✅ Todas las salidas usan funciones de escape
-- ✅ Verificación de permisos en páginas de admin
-- ✅ Prevención de acceso directo a archivos
-- ✅ Compatible con WPCS y PHPCS
+- ✅ All inputs are sanitized and validated
+- ✅ All outputs use escaping functions
+- ✅ Permission checks on admin pages
+- ✅ Prevention of direct file access
+- ✅ Compatible with WPCS and PHPCS
+- ✅ No external dependencies (bundled library)
 
-## 📄 Licencia
+## 🎯 Features
 
-Este plugin está licenciado bajo GPL v2 o posterior.
+### Version 1.1.0 (Current)
 
-## 🤝 Contribuir
+- 🎨 **Top-Level Admin Menu** - Better organization with custom icon
+- 🌈 **Color Customization** - 14 customizable colors with live preview
+- 🎯 **Display Rules** - Control where the widget appears
+- 📊 **Dashboard** - Overview with widget status and quick actions
+- 🔧 **Improved Interface** - Professional admin experience
 
-Las contribuciones son bienvenidas! Si encuentras un bug o tienes una sugerencia:
+### Version 1.0.0
 
-1. Abre un issue en GitHub
-2. Envía un pull request
-3. Reporta problemas en el foro de WordPress
+- ✅ Complete integration with @n8n/chat library
+- ✅ ES6 module support
+- ✅ Admin configuration page
+- ✅ Floating and fullscreen modes
+- ✅ Multi-language support
+- ✅ Fully responsive
 
-## 📞 Soporte
+## 📄 License
 
-- **Documentación de n8n:** https://docs.n8n.io/
+This plugin is licensed under GPL v2 or later.
+
+## 🤝 Contributing
+
+Contributions are welcome! If you find a bug or have a suggestion:
+
+1. Open an issue on GitHub
+2. Submit a pull request
+3. Report issues in the WordPress forum
+
+### Development Setup
+
+```bash
+# Install dependencies
+npm install
+composer install
+
+# Development mode
+npm run dev
+
+# Build for production
+npm run build
+
+# Create distributable ZIP
+npm run bundle
+
+# Run linters
+npm run lint
+composer lint:wpcs
+```
+
+## 📞 Support
+
+- **n8n Documentation:** https://docs.n8n.io/
 - **Chat Trigger Docs:** https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-langchain.chattrigger/
+- **Plugin Author:** https://alexcuadra.dev
 
-## 🙏 Créditos
+## 🙏 Credits
 
-Desarrollado por Alex Cuadra
+Developed by Alex Cuadra
 - Website: https://alexcuadra.dev
-- Basado en la librería @n8n/chat
+- Based on the @n8n/chat library
 
 ## 📋 Changelog
 
+### 1.1.0 - 2025-11-11
+- ✨ Added top-level admin menu with custom chat icon
+- ✨ Added color customization system with 14 colors
+- ✨ Added live preview for color changes
+- ✨ Added display rules for page targeting
+- ✨ Added dashboard page with widget status
+- 🔧 Reorganized admin interface for better UX
+- 🔧 Bundled @n8n/chat library (WordPress.org compliant)
+- 🔧 Improved security and sanitization
+- 🔧 All strings now in English (translatable)
+
 ### 1.0.0 - 2025-11-04
-- 🎉 Lanzamiento inicial
-- ✅ Integración completa con @n8n/chat
-- ✅ Soporte para módulos ES6
-- ✅ Página de configuración en admin
-- ✅ Modo flotante y pantalla completa
-- ✅ Soporte multiidioma
-- ✅ Totalmente responsive
+- 🎉 Initial release
+- ✅ Complete @n8n/chat integration
+- ✅ ES6 module support
+- ✅ Admin configuration page
+- ✅ Floating and fullscreen modes
+- ✅ Multi-language support
+- ✅ Fully responsive
 
 ---
 
-**¿Te gusta el plugin? ¡Déjanos una reseña! ⭐⭐⭐⭐⭐**
-
+**Love the plugin? Leave us a review! ⭐⭐⭐⭐⭐**
