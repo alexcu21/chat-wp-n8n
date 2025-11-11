@@ -32,8 +32,8 @@
 		// Apply colors to preview (using actual n8n chat widget classes)
 		const $preview = $('#chat-preview-container');
 		
-		// Main chat background
-		$preview.css('background-color', colors.background);
+		// Main chat background (applied to .chat-layout)
+		$preview.find('.chat-layout').css('background-color', colors.background);
 		
 		// Chat Header
 		$preview.find('.chat-header').css({

@@ -289,7 +289,9 @@ function chat_for_n8n_appearance_page() {
 					<?php esc_html_e( 'See your color changes in real-time', 'chat-for-n8n' ); ?>
 				</p>
 				
-				<div id="chat-preview-container" class="n8n-chat chat-layout">
+				<div id="chat-preview-container" class="chat-window-wrapper n8n-chat">
+				<div class="chat-window">
+				<div class="chat-layout">
 					<!-- Chat Header -->
 					<div class="chat-header">
 						<div class="chat-heading">
@@ -348,6 +350,8 @@ function chat_for_n8n_appearance_page() {
 							</div>
 						</div>
 					</div>
+				</div>
+				</div>
 				</div>
 			</div>
 		</div>

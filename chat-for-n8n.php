@@ -920,8 +920,9 @@ function chat_for_n8n_inject_custom_css() {
 			--cfn-placeholder: {$colors['placeholder_text']};
 		}
 
-		/* Apply colors to n8n chat widget */
-		.n8n-chat {
+		/* Apply colors to n8n chat widget - Target only the chat window, not toggle button */
+		.n8n-chat .chat-layout,
+		.n8n-chat .chat-window {
 			background-color: var(--cfn-background) !important;
 			color: var(--cfn-text) !important;
 		}
@@ -951,7 +952,7 @@ function chat_for_n8n_inject_custom_css() {
 		/* Input field */
 		.n8n-chat input[type='text'],
 		.n8n-chat textarea,
-		.n8n-chat .chat-input {
+		.n8n-chat .chat-input textarea {
 			background-color: var(--cfn-input-bg) !important;
 			border-color: var(--cfn-input-border) !important;
 			color: var(--cfn-input-text) !important;
@@ -966,21 +967,28 @@ function chat_for_n8n_inject_custom_css() {
 		/* Send button */
 		.n8n-chat button[type='submit'],
 		.n8n-chat .send-button,
-		.n8n-chat .chat-submit-button {
+		.n8n-chat .chat-input-send-button {
 			background-color: var(--cfn-send-button) !important;
 			color: #ffffff !important;
 		}
 
 		/* Primary color for links and accents */
-		.n8n-chat a,
+		.n8n-chat .chat-layout a,
+		.n8n-chat .chat-window a,
 		.n8n-chat .link {
 			color: var(--cfn-primary) !important;
 		}
 
-		/* Close button */
+		/* Close button in header */
 		.n8n-chat .close-button,
 		.n8n-chat .chat-close-button {
 			color: var(--cfn-header-text) !important;
+		}
+		
+		/* Ensure toggle button is NOT affected by background color */
+		.n8n-chat .chat-window-toggle {
+			background-color: var(--chat--toggle--background) !important;
+			color: var(--chat--toggle--color) !important;
 		}
 	";
 
